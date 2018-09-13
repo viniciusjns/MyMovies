@@ -19,7 +19,6 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity implements HasSupportFragmentInjector {
 
-
     protected T mViewDataBinding;
     protected V mViewModel;
 
@@ -44,14 +43,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
             mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(getViewModelClass());
 
         initBinding();
-    }
-
-    protected T getBinding() {
-        return mViewDataBinding;
-    }
-
-    protected V getViewModel() {
-        return mViewModel;
     }
 
     @Override
