@@ -19,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -37,5 +38,6 @@ ext {
     okhttpVersion = '3.8.1'
     picassoVersion = '2.5.2'
     okhttpDownloaderVersion = '1.1.0'
+    viewsfromVersion = '1.0.0'
 
 }

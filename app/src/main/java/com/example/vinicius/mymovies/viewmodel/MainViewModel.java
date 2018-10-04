@@ -48,6 +48,10 @@ public class MainViewModel extends BaseViewModel<MainViewModel.MainListener> {
 
     }
 
+    public void onClickFab() {
+        mNavigator.onOpenSearchActivity();
+    }
+
     public ObservableField<Movie> getMovie() {
         return movie;
     }
@@ -57,6 +61,6 @@ public class MainViewModel extends BaseViewModel<MainViewModel.MainListener> {
     }
 
     public interface MainListener {
-
+        void onOpenSearchActivity();
     }
 }

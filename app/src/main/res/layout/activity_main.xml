@@ -4,26 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="main"
-            type="com.example.vinicius.mymovies.viewmodel.MainViewModel"/>
+            type="com.example.vinicius.mymovies.viewmodel.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/viewRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/poster"
+        <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary">
 
-        <TextView
-            android:id="@+id/text"
+            <ImageView
+                android:id="@+id/ivToolbarBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                app:srcCompat="@drawable/vt_back_toolbar"/>
+
+            <TextView
+                android:id="@+id/tvToolbarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_toRightOf="@+id/ivToolbarBack"
+                android:text="Listagem"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/poster"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={main.movie.title}" />
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@={main.movie.title}" />
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/vt_search"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="@{() -> main.onClickFab()}"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

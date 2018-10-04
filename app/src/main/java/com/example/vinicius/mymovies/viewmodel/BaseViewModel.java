@@ -10,12 +10,12 @@ public class BaseViewModel<N> extends ViewModel implements LifecycleOwner {
 
     private LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
 
-    private N mNavigator;
+    protected N mNavigator;
 
-    public N getNavigator() {
-        return mNavigator;
-    }
-
+//    public N getNavigator() {
+//        return mNavigator;
+//    }
+//
     public void setNavigator(N mNavigator) {
         this.mNavigator = mNavigator;
     }

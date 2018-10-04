@@ -8,11 +8,12 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.vinicius.mymovies"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
 
         dataBinding {
             enabled = true
@@ -59,6 +60,9 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$rootProject.okhttpDownloaderVersion"
+
+    //
+    implementation "com.github.jaouan:viewsfrom:$rootProject.viewsfromVersion"
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
