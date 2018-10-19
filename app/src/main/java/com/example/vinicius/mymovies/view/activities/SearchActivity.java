@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
 import android.transition.ArcMotion;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -42,6 +43,8 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     private int mRadius;
     private boolean mHidingAnimationStarted = false;
 
+    private SearchMoviesAdapter adapter;
+
     @Override
     public int getLayout() {
         return R.layout.activity_search;
@@ -57,6 +60,8 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
         mViewDataBinding.setSearch(mViewModel);
         mViewModel.setNavigator(this);
 
+        adapter = new SearchMoviesAdapter(this);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateOpening();
         } else {
@@ -64,7 +69,38 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
             endAnimation();
         }
 
-        mViewModel.searchMoviesByTitle("batman").observe(this, new Observer<SearchResponse>() {
+        mViewDataBinding.svMovies.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewDataBinding.tvToolbarText.setVisibility(View.GONE);
+            }
+        });
+
+        mViewDataBinding.svMovies.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                mViewDataBinding.tvToolbarText.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        mViewDataBinding.svMovies.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchMoviesByName(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+    }
+
+    private void searchMoviesByName(String movieName) {
+        mViewModel.searchMoviesByTitle(movieName).observe(this, new Observer<SearchResponse>() {
             @Override
             public void onChanged(@Nullable SearchResponse searchResponse) {
                 setupMoviesList(searchResponse.getMovies());
@@ -73,8 +109,8 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     }
 
     private void setupMoviesList(List<Movie> response) {
-        SearchMoviesAdapter adapter = new SearchMoviesAdapter(response, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        adapter.setMovies(response);
         mViewDataBinding.rvSearchMovies.setAdapter(adapter);
         mViewDataBinding.rvSearchMovies.setHasFixedSize(true);
         mViewDataBinding.rvSearchMovies.setLayoutManager(layoutManager);

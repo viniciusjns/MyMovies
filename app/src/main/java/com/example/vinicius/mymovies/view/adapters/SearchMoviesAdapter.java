@@ -20,9 +20,13 @@ public class SearchMoviesAdapter extends RecyclerView.Adapter<SearchMoviesAdapte
     private List<Movie> movies;
     private OnClickSearchMovies onClickSearchMovies;
 
-    public SearchMoviesAdapter(List<Movie> movies, OnClickSearchMovies onClickSearchMovies) {
-        this.movies = movies;
+    public SearchMoviesAdapter(OnClickSearchMovies onClickSearchMovies) {
         this.onClickSearchMovies = onClickSearchMovies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+        notifyDataSetChanged();
     }
 
     @NonNull
