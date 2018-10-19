@@ -4,10 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
 import android.transition.ArcMotion;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -19,13 +22,20 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.Toast;
 
 import com.example.vinicius.mymovies.R;
 import com.example.vinicius.mymovies.databinding.ActivitySearchBinding;
+import com.example.vinicius.mymovies.model.GenericResponse;
+import com.example.vinicius.mymovies.model.Movie;
+import com.example.vinicius.mymovies.model.SearchResponse;
+import com.example.vinicius.mymovies.view.adapters.SearchMoviesAdapter;
 import com.example.vinicius.mymovies.viewmodel.SearchViewModel;
 import com.jaouan.viewsfrom.Views;
 
-public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> {
+import java.util.List;
+
+public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchViewModel> implements SearchViewModel.SearchListener, SearchMoviesAdapter.OnClickSearchMovies {
 
     private int cx;
     private int cy;
@@ -44,12 +54,35 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
 
     @Override
     protected void initBinding() {
+        mViewDataBinding.setSearch(mViewModel);
+        mViewModel.setNavigator(this);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateOpening();
         } else {
             mViewDataBinding.getRoot().setAlpha(1);
             endAnimation();
         }
+
+        mViewModel.searchMoviesByTitle("batman").observe(this, new Observer<SearchResponse>() {
+            @Override
+            public void onChanged(@Nullable SearchResponse searchResponse) {
+                setupMoviesList(searchResponse.getMovies());
+            }
+        });
+    }
+
+    private void setupMoviesList(List<Movie> response) {
+        SearchMoviesAdapter adapter = new SearchMoviesAdapter(response, this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mViewDataBinding.rvSearchMovies.setAdapter(adapter);
+        mViewDataBinding.rvSearchMovies.setHasFixedSize(true);
+        mViewDataBinding.rvSearchMovies.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void onClickOpenMovieDetail(Movie movie) {
+        Toast.makeText(this, movie.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

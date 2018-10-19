@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="16dp"
-                app:srcCompat="@drawable/vt_back_toolbar"/>
+                app:srcCompat="@drawable/vt_back_toolbar"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tvToolbarText"
@@ -35,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_toRightOf="@+id/ivToolbarBack"
-                android:text="Listagem"
+                android:layout_centerHorizontal="true"
+                android:text="My Movies"
                 android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
