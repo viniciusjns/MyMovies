@@ -17,6 +17,12 @@ import com.example.vinicius.mymovies.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainViewModel.MainListener {
 
+    /*
+    See this link to create a new layout
+
+    http://yasirameen.com/2016/05/android-activity-transition/
+     */
+
     @Override
     public int getLayout() {
         return R.layout.activity_main;
