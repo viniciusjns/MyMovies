@@ -2,6 +2,8 @@ package com.example.vinicius.mymovies.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.vinicius.mymovies.BR;
 import com.google.gson.annotations.Expose;
@@ -9,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Movie extends BaseObservable {
+public class Movie extends BaseObservable implements Parcelable {
 
     @SerializedName("Title")
     @Expose
@@ -86,6 +88,45 @@ public class Movie extends BaseObservable {
     @SerializedName("Response")
     @Expose
     private String response;
+
+    protected Movie(Parcel in) {
+        title = in.readString();
+        year = in.readString();
+        rated = in.readString();
+        released = in.readString();
+        runtime = in.readString();
+        genre = in.readString();
+        director = in.readString();
+        writer = in.readString();
+        actors = in.readString();
+        plot = in.readString();
+        language = in.readString();
+        country = in.readString();
+        awards = in.readString();
+        poster = in.readString();
+        metascore = in.readString();
+        imdbRating = in.readString();
+        imdbVotes = in.readString();
+        imdbID = in.readString();
+        type = in.readString();
+        dVD = in.readString();
+        boxOffice = in.readString();
+        production = in.readString();
+        website = in.readString();
+        response = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     @Bindable
     public String getTitle() {
@@ -318,5 +359,38 @@ public class Movie extends BaseObservable {
                 ", website='" + website + '\'' +
                 ", response='" + response + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeString(year);
+        parcel.writeString(rated);
+        parcel.writeString(released);
+        parcel.writeString(runtime);
+        parcel.writeString(genre);
+        parcel.writeString(director);
+        parcel.writeString(writer);
+        parcel.writeString(actors);
+        parcel.writeString(plot);
+        parcel.writeString(language);
+        parcel.writeString(country);
+        parcel.writeString(awards);
+        parcel.writeString(poster);
+        parcel.writeString(metascore);
+        parcel.writeString(imdbRating);
+        parcel.writeString(imdbVotes);
+        parcel.writeString(imdbID);
+        parcel.writeString(type);
+        parcel.writeString(dVD);
+        parcel.writeString(boxOffice);
+        parcel.writeString(production);
+        parcel.writeString(website);
+        parcel.writeString(response);
     }
 }

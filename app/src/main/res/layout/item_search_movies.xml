@@ -3,63 +3,151 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:id="@+id/content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:layout_marginBottom="4dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+    <!--app:cardCornerRadius="5dp">-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<View-->
+    <!--android:id="@+id/view"-->
+    <!--android:layout_width="5dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/colorAccent" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/ivPoster"-->
+    <!--android:layout_width="90dp"-->
+    <!--android:layout_height="90dp"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:layout_toRightOf="@+id/view"-->
+    <!--android:scaleType="centerCrop"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvTitle"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_toRightOf="@+id/ivPoster"-->
+    <!--android:layout_alignTop="@+id/ivPoster"-->
+    <!--android:textSize="18sp"-->
+    <!--tools:text="Batman"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvYear"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/tvTitle"-->
+    <!--android:layout_toRightOf="@+id/ivPoster"-->
+    <!--tools:text="2017"/>-->
+
+    <!--</RelativeLayout>-->
+
+
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--</LinearLayout>-->
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="1dp">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/content"
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:cardCornerRadius="5dp">
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:elevation="6dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorAccent" />
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/ivPoster"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="8dp"
-                    android:layout_toRightOf="@+id/view"
-                    android:scaleType="centerCrop"/>
+                    android:id="@+id/ivBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/guardians"
+                    android:transitionName="selectedMovie" />
+
+                <View
+                    android:id="@+id/vw_blacklayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha=".7"
+                    android:background="#000000" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardPoster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/ivPoster"
+                        android:layout_width="80dp"
+                        android:layout_height="110dp"
+                        android:layout_margin="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/guardians" />
+                </android.support.v7.widget.CardView>
 
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/ivPoster"
-                    android:layout_alignTop="@+id/ivPoster"
-                    android:textSize="18sp"
-                    tools:text="Batman"/>
+                    android:layout_alignTop="@+id/cardPoster"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/cardPoster"
+                    android:layout_toRightOf="@+id/cardPoster"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:text="Batman Vs Superman"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvTitle"
-                    android:layout_toRightOf="@+id/ivPoster"
-                    tools:text="2017"/>
-
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/cardPoster"
+                    android:layout_toRightOf="@+id/cardPoster"
+                    android:paddingLeft="10dp"
+                    android:text="2016"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
-
         </android.support.v7.widget.CardView>
-
     </LinearLayout>
 </layout>

@@ -62,6 +62,7 @@ public class SearchMoviesAdapter extends RecyclerView.Adapter<SearchMoviesAdapte
 
         public void bind(Movie movie) {
             this.picasso.load(movie.getPoster()).into(binding.ivPoster);
+            this.picasso.load(movie.getPoster()).into(binding.ivBackground);
             binding.tvTitle.setText(movie.getTitle());
             binding.tvYear.setText(movie.getYear());
             binding.content.setOnClickListener(new View.OnClickListener() {

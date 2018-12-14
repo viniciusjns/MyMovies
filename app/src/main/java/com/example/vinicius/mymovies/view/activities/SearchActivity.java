@@ -5,11 +5,15 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
 import android.transition.ArcMotion;
@@ -23,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vinicius.mymovies.R;
@@ -61,6 +66,11 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
         mViewModel.setNavigator(this);
 
         adapter = new SearchMoviesAdapter(this);
+
+        ImageView searchClose = mViewDataBinding.svMovies.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        ImageView searchBtn = mViewDataBinding.svMovies.findViewById(android.support.v7.appcompat.R.id.search_button);
+        searchClose.setColorFilter(ContextCompat.getColor(this, R.color.colorWhite));
+        searchBtn.setColorFilter(ContextCompat.getColor(this, R.color.colorWhite));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateOpening();
@@ -119,6 +129,9 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     @Override
     public void onClickOpenMovieDetail(Movie movie) {
         Toast.makeText(this, movie.getTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE, movie);
+        startActivity(intent);
     }
 
     @Override
@@ -167,7 +180,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
                     @Override
                     public void onAnimationStart(Animator animator) {
                         // start with no alpha because we animate it
-                        mViewDataBinding.body.setAlpha(0);
+//                        mViewDataBinding.body.setAlpha(0);
 
                         // revert full alpha. Its need to be 0 before Activity creating because shared elements transition
                         mViewDataBinding.getRoot().setAlpha(1);
@@ -210,10 +223,10 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
                 set.setDuration(100);
                 set.setInterpolator(new LinearInterpolator());
 
-                ObjectAnimator alphaBody = ObjectAnimator.ofFloat(mViewDataBinding.body, "alpha", 1, 0);
+//                ObjectAnimator alphaBody = ObjectAnimator.ofFloat(mViewDataBinding.body, "alpha", 1, 0);
 
-                set.playTogether(alphaBody);
-                set.start();
+//                set.playTogether(alphaBody);
+//                set.start();
             }
 
             @Override
@@ -236,15 +249,15 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
 
     private void endAnimation() {
         // revert alpha to animate
-        mViewDataBinding.body.setAlpha(1);
+//        mViewDataBinding.body.setAlpha(1);
 
         // animate!!!
-        Views.from((ViewGroup) mViewDataBinding.getRoot())
-                .withId(R.id.body)
-                .animateWith(SearchActivity.this, R.anim.enter_scale_fade)
-                .withDelayBetweenEachChild(100)
-//                .withEndAction(SearchActivity.this::setupCartAdapter)
-                .start();
+//        Views.from((ViewGroup) mViewDataBinding.getRoot())
+//                .withId(R.id.body)
+//                .animateWith(SearchActivity.this, R.anim.enter_scale_fade)
+//                .withDelayBetweenEachChild(100)
+////                .withEndAction(SearchActivity.this::setupCartAdapter)
+//                .start();
     }
 
     public static int dpToPx(int dp) {

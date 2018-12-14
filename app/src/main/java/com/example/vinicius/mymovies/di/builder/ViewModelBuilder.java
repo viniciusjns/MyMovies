@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.example.vinicius.mymovies.di.annotation.ViewModelKey;
 import com.example.vinicius.mymovies.viewmodel.MainViewModel;
+import com.example.vinicius.mymovies.viewmodel.MovieDetailViewModel;
 import com.example.vinicius.mymovies.viewmodel.SearchViewModel;
 import com.example.vinicius.mymovies.viewmodel.ViewModelProviderFactory;
 
@@ -23,7 +24,12 @@ public abstract class ViewModelBuilder {
     @Binds
     @IntoMap
     @ViewModelKey(SearchViewModel.class)
-    abstract ViewModel bindSearchViewModel(SearchViewModel mainViewModel);
+    abstract ViewModel bindSearchViewModel(SearchViewModel searchViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailViewModel.class)
+    abstract ViewModel bindMovieDetailViewModel(MovieDetailViewModel movieDetailViewModel);
 
     // ViewModel Factory
     @Binds

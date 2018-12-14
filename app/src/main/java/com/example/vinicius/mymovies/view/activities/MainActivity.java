@@ -38,11 +38,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mViewDataBinding.setMain(mViewModel);
         mViewModel.setNavigator(this);
 
-        mViewModel.getMovieByCode("tt3896198").observe(this, genericResponse -> {
-            Movie movie = genericResponse.getResponse();
-            mViewModel.setMovie(movie);
-            APIClient.getInstance().getPicasso().load(movie.getPoster()).into(mViewDataBinding.poster);
-        });
+//        mViewModel.getMovieByCode("tt3896198").observe(this, genericResponse -> {
+//            Movie movie = genericResponse.getResponse();
+//            mViewModel.setMovie(movie);
+//            APIClient.getInstance().getPicasso().load(movie.getPoster()).into(mViewDataBinding.poster);
+//        });
     }
 
     @Override
